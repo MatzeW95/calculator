@@ -22,6 +22,14 @@ button {
     font-size: 18px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
+p:hover {
+    cursor: default;
+}
+
 #calculator {
     width: 350px;
     display: flex;
