@@ -6,34 +6,44 @@ var oneNegative = false;                //if true -> first number nagative
 var twoNegative = false;                //if true -> second number nagative
 var setArithmetic = false;              //if true -> allows the possibility to set the arithmetic
 var ans = 0;                            //saves the last end result
-var numberOne, numberTwo, arithmetic;   //defines the numbers and arithmetic for the calculation
+var numberOne, numberTwo;               //defines the numbers for the calculation
+var arithmetic = 0;                     //sets arithmetic selection on 0 for neutral
 
 
-//checks the user input and decides based on the input what to do next
+//Gets user input based on keyboard input
 window.addEventListener("keydown", function(event) {
 
-    if (inputOneNegative == true && event.key == "-") {
+    userInputToCalculation(event.key);
+});
+
+//checks the user input and decides based on the input what to do next
+function userInputToCalculation(userInput) {
+
+    if (inputOneNegative == true && userInput == "-") {
         oneNegative = true;
         inputOneNegative = false;
     }
-    else if (inputTwoNegative == true && event.key == "-") {
+    else if (inputTwoNegative == true && userInput == "-") {
         twoNegative = true;
         inputTwoNegative = false;
     }
-    else if (event.key >= 0 && event.key <= 9 || event.key == ".") {
+    else if (userInput >= 0 && userInput <= 9 || userInput == ".") {
         inputOneNegative = false;
         inputTwoNegative = false;
-        addToInput(event.key);
+        addToInput(userInput);
     }
-    else if(setArithmetic == false && (event.key == "/" || event.key == "*" || event.key == "-" || event.key == "+")) {
+    else if(setArithmetic == false && (userInput == "/" || userInput == "*" || userInput == "-" || userInput == "+")) {
         setArithmetic = true;
-        selectArithmetic(event.key);
+        selectArithmetic(userInput);
         inputTwoNegative = true;
     }
-    else if(event.key == "=" || event.key == "Enter") {
+    else if(userInput == "=" || userInput == "Enter") {
         getResult();
     }
-});
+    else if(userInput == "c" || userInput == "C") {
+        removeFromInput();
+    }
+}
 
 //adds numbers into a string and checks that there is maximal one point inside the number
 function addToInput(inputNumber) {
@@ -50,6 +60,27 @@ function addToInput(inputNumber) {
     }
 
     console.log("New number: " + Number(input));
+}
+
+/*
+- removes the last user input
+- if input length = 1 -> reset all negative selection from user
+- checks arithmetic if set or not to identify if it is number one or two
+*/
+function removeFromInput() {
+
+    if (input.toString().length > 1) {
+        input = input.toString().slice(0, -1); 
+    }
+
+    if(input.toString().length == 1 && arithmetic == 0) {
+        inputOneNegative = true;
+        oneNegative = false;
+    }
+    else if (input.toString().length == 1 && arithmetic != 0) {
+        inputTwoNegative = true;
+        twoNegative = false;
+    }
 }
 
 //resets the variables for the addToInput function
