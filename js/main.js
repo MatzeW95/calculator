@@ -1,136 +1,135 @@
-var inputNumber = 0;
-var firstNumber = 0;
-var ans = 0;
-var arithmetic = 0;
-var sign = false;
-var changeSign = false;
-var secondNumber = false;
+var input = 0;                          //current user input value
+var inputPointSet = false;              //checks if the user input number already contains a point
+var inputOneNegative = true;            //if true activates the possibility to set a negative first number
+var inputTwoNegative = false;           //if true activates the possibility to set a negative second number 
+var oneNegative = false;                //if true -> first number nagative
+var twoNegative = false;                //if true -> second number nagative
+var setArithmetic = false;              //if true -> allows the possibility to set the arithmetic
+var ans = 0;                            //saves the last end result
+var numberOne, numberTwo, arithmetic;   //defines the numbers and arithmetic for the calculation
 
 
+//checks the user input and decides based on the input what to do next
 window.addEventListener("keydown", function(event) {
 
-    var input = event.key;
-
-    if (checkInput(input) == true) {
-        
-        if (input >= 0 && input <= 9) {
-            addNumber(input);
-        }
-        else if (inputNumber == 0 && input == "-") {
-            sign = true;
-            addNumber(input);
-        }
-        else if (input == "/" || input == "*" || input == "-" || input == "+") {
-            changeArithmetic(input);
-
-            firstNumber = inputNumber;
-
-            secondNumber = true;
-        }
-        else if(input == "=" || input == "Enter") {
-
-            let value1 = Number(firstNumber);
-            let value2 = Number(inputNumber);
-
-            let textOutput = ""
-            
-            if (arithmetic == 1) {
-                ans = value1 / value2;
-                textOutput = value1 + " / " + value2;
-            }
-            else if (arithmetic == 2) {
-                ans = value1 * value2;
-                textOutput = value1 + " * " + value2;
-            }
-            else if (arithmetic == 3) {
-                ans = value1 - value2;
-                textOutput = value1 + " - " + value2;
-            }
-            else if (arithmetic == 4) {
-                ans = value1 + value2;
-                textOutput = value1 + " + " + value2;
-            }
-
-            document.getElementById("outputTextLast").innerHTML = textOutput;
-
-            document.getElementById("outputTextNew").innerHTML = ans;
-        }
+    if (inputOneNegative == true && event.key == "-") {
+        oneNegative = true;
+        inputOneNegative = false;
+    }
+    else if (inputTwoNegative == true && event.key == "-") {
+        twoNegative = true;
+        inputTwoNegative = false;
+    }
+    else if (event.key >= 0 && event.key <= 9 || event.key == ".") {
+        inputOneNegative = false;
+        inputTwoNegative = false;
+        addToInput(event.key);
+    }
+    else if(setArithmetic == false && (event.key == "/" || event.key == "*" || event.key == "-" || event.key == "+")) {
+        setArithmetic = true;
+        selectArithmetic(event.key);
+        inputTwoNegative = true;
+    }
+    else if(event.key == "=" || event.key == "Enter") {
+        getResult();
     }
 });
 
-function checkInput(input) {
+//adds numbers into a string and checks that there is maximal one point inside the number
+function addToInput(inputNumber) {
 
-    let checkedInput = false
-
-    if(
-        (input >= 0 && input <= 9   //button 0 - 9
-        || input == "c"             //button C
-        || input == "C"             //button C
-        || input == "Backspace"     //button <
-        || input == "/"             //button /
-        || input == "*"             //button *
-        || input == "-"             //button -
-        || input == "+"             //button +
-        || input == "Enter"         //button Enter
-        || input == "="             //button Enter
-        || input == " "             //button Ans
-        || input == "."             //button .
-        || input == ",")            //button .
-    ) {
-        checkedInput = true;
+    if(inputPointSet == true && inputNumber == ".") {
+        
+    }
+    else if(inputPointSet == false && inputNumber == ".") {
+        inputPointSet = true;
+        input += inputNumber;
+    }
+    else {
+        input += inputNumber;
     }
 
-    return checkedInput;
+    console.log("New number: " + Number(input));
 }
 
-function addNumber(number) {
+//resets the variables for the addToInput function
+function resetAddToInput() {
 
-    if (secondNumber == true) {
-        
-        secondNumber = false;
-        inputNumber = 0;
-    }
-
-    if(inputNumber == 0 && sign == true) {
-        inputNumber = 0;
-        sign = false;
-        changeSign = true;
-    }
-    else if (inputNumber == 0 && sign == false) {
-        
-        if (changeSign == true) {
-            inputNumber = number * -1;
-            changeSign = false;
-        }
-        else {
-            inputNumber = number;
-        }
-    }
-    else {   
-        inputNumber = `${inputNumber}${number}`;
-    }
-
-    document.getElementById("outputTextNew").innerHTML = inputNumber;
+    numberOne = input;
+    input = 0;
+    inputPointSet = false;
 }
 
-function changeArithmetic(inputArithmetic) {
+//sets the arithmetic based on the user input
+function selectArithmetic(ari) {
 
-    if (inputArithmetic == "/") {
+    if (ari == "+") {
         arithmetic = 1;
-        document.getElementById("outputTextLast").innerHTML = inputNumber + " /";
     }
-    else if (inputArithmetic == "*") {
+    else if (ari == "-") {
         arithmetic = 2;
-        document.getElementById("outputTextLast").innerHTML = inputNumber + " *";
     }
-    else if (inputArithmetic == "-") {
+    else if (ari == "*") {
         arithmetic = 3;
-        document.getElementById("outputTextLast").innerHTML = inputNumber + " -";
     }
-    else if (inputArithmetic == "+") {
+    else if (ari == "/") {
         arithmetic = 4;
-        document.getElementById("outputTextLast").innerHTML = inputNumber + " +";
     }
 
-    document.getElementById("outputTextNew").innerHTML = 0;
+    resetAddToInput();
+}
+
+/*
+- converts strings into numbers
+- checks if any number needs to be negative
+- calculates based on the user input arithmetic
+- saves the result in the "ans" variable
+- resets all variables for a new calculation (only "ans" is saved)
+ */
+function getResult() {
+
+    numberTwo = input;
+
+    numberOne = Number(numberOne);
+    numberTwo = Number(numberTwo);
+
+    if (oneNegative == true) {
+        numberOne = numberOne * (-1);
+    }
+
+    if (twoNegative == true) {
+        numberTwo = numberTwo * (-1);
+    }
+
+    switch (arithmetic) {
+        case 1:
+            ans = numberOne + numberTwo;
+            break;
+        case 2:
+            ans = numberOne - numberTwo; 
+            break;
+        case 3:
+            ans = numberOne * numberTwo;
+            break;
+        case 4:
+            ans = numberOne / numberTwo;
+            break;
+    }
+
+    console.log(ans);
+    resetAll();
+}
+
+//resets all varibales that are needed for a new calculation
+function resetAll() {
+    input = 0;
+    inputPointSet = false;
+    numberOne = 0;
+    numberTwo = 0;
+    arithmetic = 0;
+    setArithmetic = false;
+    inputOneNegative = true;
+    inputTwoNegative = false;
+    oneNegative = false;
+    twoNegative = false;
 }
