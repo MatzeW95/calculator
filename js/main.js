@@ -8,6 +8,8 @@ var setArithmetic = false;              //if true -> allows the possibility to s
 var ans = 0;                            //saves the last end result
 var numberOne, numberTwo;               //defines the numbers for the calculation
 var arithmetic = 0;                     //sets arithmetic selection on 0 for neutral
+var oneSetAns = false;
+var twoSetAns = false;
 
 
 //Gets user input based on keyboard input
@@ -41,7 +43,13 @@ function userInputToCalculation(userInput) {
         getResult();
     }
     else if(userInput == "c" || userInput == "C") {
+        resetAll();
+    }
+    else if (userInput == "Backspace") {
         removeFromInput();
+    }
+    else if (userInput == "a" || userInput == "A") {
+        inputEqualsAns();
     }
 }
 
@@ -124,6 +132,14 @@ function getResult() {
     numberOne = Number(numberOne);
     numberTwo = Number(numberTwo);
 
+    if (oneSetAns == true) {
+        numberOne = ans;
+    }
+
+    if (twoSetAns == true) {
+        numberTwo = ans;
+    }
+
     if (oneNegative == true) {
         numberOne = numberOne * (-1);
     }
@@ -147,8 +163,8 @@ function getResult() {
             break;
     }
 
-    console.log(ans);
     resetAll();
+    console.log(ans)
 }
 
 //resets all varibales that are needed for a new calculation
@@ -163,4 +179,16 @@ function resetAll() {
     inputTwoNegative = false;
     oneNegative = false;
     twoNegative = false;
+    oneSetAns = false;
+    twoSetAns = false;
+}
+
+function inputEqualsAns() {
+
+    if (arithmetic == 0) {
+        oneSetAns = true;
+    }
+    else if(arithmetic != 0) {
+        twoSetAns = true;
+    }
 }
