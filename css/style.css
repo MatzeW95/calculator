@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 :root {
-    --colorBorder: #000000;
+    --fontColor: #EEEEEE;
+    --buttonBackgroundColor: #00ADB5;
+    --calculatorBackgroundColor: #393E46;
+    --backgroundColor: #222831;
 }
 
 body {
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -14,16 +17,23 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    background-color: var(--backgroundColor);
+    color: var(--fontColor);
 }
 
 button {
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
+    background-color: var(--buttonBackgroundColor);
+    color: var(--fontColor);
+
+    border-radius: 5px;
+    border: 2px solid var(--buttonBackgroundColor);
 }
 
 button:hover {
     cursor: pointer;
+    border: 2px solid var(--fontColor);
 }
 
 p:hover {
@@ -37,14 +47,18 @@ p:hover {
     align-items: center;
     justify-content: center;
     box-sizing: content-box;
-    border: 1px solid var(--colorBorder);
+    border: 1px solid var(--calculatorBackgroundColor);
+    border-radius: 10px;
     padding: 1rem;
+    background-color: var(--calculatorBackgroundColor);
+    box-shadow: 1px 1px 5px #00ADB5;
 }
 
 #output {
     box-sizing:border-box;
     margin: 0 0 1rem 0;
-    border: 1px solid var(--colorBorder);
+    border: 2px solid var(--backgroundColor);
+    border-radius: 5px;
     width: 100%;
     text-align: right;
     display: flex;
@@ -62,11 +76,11 @@ p:hover {
 }
 
 #outputTextLast {
-    font-size: 20px;
+    font-size: 25px;
 }
 
 #outputTextNew {
-    font-size: 30px;
+    font-size: 35px;
 }
 
 #input {
