@@ -11,7 +11,7 @@ var arithmetic = 0;                     //sets arithmetic selection on 0 for neu
 var oneSetAns = false;                  //if true -> number one is the last answer
 var twoSetAns = false;                  //if true -> number two is the last answer
 
-
+//button eventlistener
 document.getElementById("backspace").addEventListener("click", userInputToCalculation("Backspace"));
 document.getElementById("delete").addEventListener("click", userInputToCalculation("c"));
 document.getElementById("division").addEventListener("click", userInputToCalculation("/"));
@@ -32,8 +32,6 @@ document.getElementById("number6").addEventListener("click", userInputToCalculat
 document.getElementById("number7").addEventListener("click", userInputToCalculation("7"));
 document.getElementById("number8").addEventListener("click", userInputToCalculation("8"));
 document.getElementById("number9").addEventListener("click", userInputToCalculation("9"));
-
-
 
 //Gets user input based on keyboard input
 window.addEventListener("keydown", function(event) {
