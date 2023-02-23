@@ -2,8 +2,8 @@ var input = 0;                          //current user input value
 var inputPointSet = false;              //checks if the user input number already contains a point
 var inputOneNegative = true;            //if true activates the possibility to set a negative first number
 var inputTwoNegative = false;           //if true activates the possibility to set a negative second number 
-var oneNegative = false;                //if true -> first number nagative
-var twoNegative = false;                //if true -> second number nagative
+var oneNegative = false;                //if true -> first number negative
+var twoNegative = false;                //if true -> second number negative
 var setArithmetic = false;              //if true -> allows the possibility to set the arithmetic
 var ans = 0;                            //saves the last end result
 var numberOne, numberTwo;               //defines the numbers for the calculation
@@ -73,6 +73,13 @@ function addToInput(inputNumber) {
     }
 
     updateTextNew(Number(input));
+
+    if(arithmetic == 0) {
+        updateTextLast(Number(input), null, null);
+    }
+    else {
+        updateTextLast(Number(numberOne), arithmetic, Number(input));
+    }
 }
 
 /*
@@ -173,7 +180,16 @@ function getResult() {
             break;
     }
 
-    updateTextNew(ans);
+    if (Number.isInteger(ans) == false) {
+        updateTextNew(ans.toFixed(2));
+    }
+    else {
+        updateTextNew(ans);
+    }
+
+    oneNegative = false;
+    twoNegative = false;
+
     updateTextLast(numberOne, arithmetic, numberTwo);
 
     resetAll();
@@ -209,9 +225,11 @@ function inputEqualsAns() {
 //updates the text output from the "outputTextLast" element
 function updateTextLast(nrOne, ari, nrTwo) {
 
+    let textOutput;
+
     if (nrOne == null && ari == null && nrTwo == null) {
         
-        document.getElementById("outputTextLast").innerHTML = 0;
+        textOutput = 0;
     }
     else {
         if(nrOne == null) {
@@ -238,8 +256,21 @@ function updateTextLast(nrOne, ari, nrTwo) {
             nrTwo = "";
         }
 
-        document.getElementById("outputTextLast").innerHTML = nrOne + " " + ari + " " + nrTwo;
+        if (oneNegative == true && twoNegative == false) {
+            textOutput = "-" + nrOne + " " + ari + " " + nrTwo;
+        }
+        else if(oneNegative == false && twoNegative == true) {
+            textOutput = nrOne + " " + ari + " " + "-" + nrTwo;
+        }
+        else if(oneNegative == true && twoNegative == true) {
+            textOutput = "-" + nrOne + " " + ari + " " + "-" + nrTwo;
+        }
+        else {
+            textOutput = nrOne + " " + ari + " " + nrTwo;
+        }
     }
+
+    document.getElementById("outputTextLast").innerHTML = textOutput;
 }
 
 //updates the text output from the "outputTextNew" element 
