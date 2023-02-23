@@ -5,6 +5,7 @@
     --buttonBackgroundColor: #00ADB5;
     --calculatorBackgroundColor: #393E46;
     --backgroundColor: #222831;
+    --boxShadowColor: #111111;
 }
 
 body {
@@ -51,7 +52,7 @@ p:hover {
     border-radius: 10px;
     padding: 1rem;
     background-color: var(--calculatorBackgroundColor);
-    box-shadow: 1px 1px 5px #00ADB5;
+    box-shadow: 1px 1px 5px var(--boxShadowColor);
 }
 
 #output {
