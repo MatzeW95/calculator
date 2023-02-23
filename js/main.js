@@ -48,6 +48,7 @@ function userInputToCalculation(userInput) {
     else if(userInput == "c" || userInput == "C") {
         resetAll();
         updateTextNew(input); 
+        updateTextLast(null ,null, null);
     }
     else if (userInput == "Backspace") {
         removeFromInput();
@@ -103,6 +104,13 @@ function removeFromInput() {
     }
 
     updateTextNew(Number(input));
+    
+    if(arithmetic == 0) {
+        updateTextLast(Number(input), null, null);
+    }
+    else {
+        updateTextLast(Number(numberOne), arithmetic, Number(input));
+    }
 }
 
 //resets the variables for the addToInput function
