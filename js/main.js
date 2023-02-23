@@ -33,7 +33,7 @@ document.getElementById("number7").addEventListener("click", userInputToCalculat
 document.getElementById("number8").addEventListener("click", userInputToCalculation("8"));
 document.getElementById("number9").addEventListener("click", userInputToCalculation("9"));
 
-//Gets user input based on keyboard input
+//get user input based on keyboard input
 window.addEventListener("keydown", function(event) {
 
     userInputToCalculation(event.key);
