@@ -12,29 +12,27 @@ var oneSetAns = false;                  //if true -> number one is the last answ
 var twoSetAns = false;                  //if true -> number two is the last answer
 
 //button eventlistener (waiting that the whole document is loaded)
-window.onload = function(){
+document.getElementById("backspace").addEventListener("click", function(){userInputToCalculation("Backspace")});
+document.getElementById("delete").addEventListener("click", function(){userInputToCalculation("c")});
+document.getElementById("division").addEventListener("click", function(){userInputToCalculation("/")});
+document.getElementById("multiplication").addEventListener("click", function(){userInputToCalculation("*")});
+document.getElementById("subtraction").addEventListener("click", function(){userInputToCalculation("-")});
+document.getElementById("addition").addEventListener("click", function(){userInputToCalculation("+")});
+document.getElementById("enter").addEventListener("click", function(){userInputToCalculation("Enter")});
+document.getElementById("point").addEventListener("click", function(){userInputToCalculation(".")});
+document.getElementById("ans").addEventListener("click", function(){userInputToCalculation("a")});
 
-    document.getElementById("backspace").addEventListener("click", userInputToCalculation("Backspace"));
-    document.getElementById("delete").addEventListener("click", userInputToCalculation("c"));
-    document.getElementById("division").addEventListener("click", userInputToCalculation("/"));
-    document.getElementById("multiplication").addEventListener("click", userInputToCalculation("*"));
-    document.getElementById("subtraction").addEventListener("click", userInputToCalculation("-"));
-    document.getElementById("addition").addEventListener("click", userInputToCalculation("+"));
-    document.getElementById("enter").addEventListener("click", userInputToCalculation("Enter"));
-    document.getElementById("point").addEventListener("click", userInputToCalculation("."));
-    document.getElementById("ans").addEventListener("click", userInputToCalculation("a"));
+document.getElementById("number0").addEventListener("click", function(){userInputToCalculation("0")});
+document.getElementById("number1").addEventListener("click", function(){userInputToCalculation("1")});
+document.getElementById("number2").addEventListener("click", function(){userInputToCalculation("2")});
+document.getElementById("number3").addEventListener("click", function(){userInputToCalculation("3")});
+document.getElementById("number4").addEventListener("click", function(){userInputToCalculation("4")});
+document.getElementById("number5").addEventListener("click", function(){userInputToCalculation("5")});
+document.getElementById("number6").addEventListener("click", function(){userInputToCalculation("6")});
+document.getElementById("number7").addEventListener("click", function(){userInputToCalculation("7")});
+document.getElementById("number8").addEventListener("click", function(){userInputToCalculation("8")});
+document.getElementById("number9").addEventListener("click", function(){userInputToCalculation("9")});
 
-    document.getElementById("number0").addEventListener("click", userInputToCalculation("0"));
-    document.getElementById("number1").addEventListener("click", userInputToCalculation("1"));
-    document.getElementById("number2").addEventListener("click", userInputToCalculation("2"));
-    document.getElementById("number3").addEventListener("click", userInputToCalculation("3"));
-    document.getElementById("number4").addEventListener("click", userInputToCalculation("4"));
-    document.getElementById("number5").addEventListener("click", userInputToCalculation("5"));
-    document.getElementById("number6").addEventListener("click", userInputToCalculation("6"));
-    document.getElementById("number7").addEventListener("click", userInputToCalculation("7"));
-    document.getElementById("number8").addEventListener("click", userInputToCalculation("8"));
-    document.getElementById("number9").addEventListener("click", userInputToCalculation("9"));
-}
 
 //et user input based on keyboard input
 window.addEventListener("keydown", function(event) {
