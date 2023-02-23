@@ -3,6 +3,7 @@
 :root {
     --fontColor: #EEEEEE;
     --buttonBackgroundColor: #00ADB5;
+    --buttonBackgroundColorActive: #019097;
     --calculatorBackgroundColor: #393E46;
     --backgroundColor: #222831;
     --boxShadowColor: #111111;
@@ -38,8 +39,7 @@ button:hover {
 }
 
 button:active {
-    border: 2px solid var(--fontColor);
-    box-shadow: inset 1px 1px 5px var(--fontColor);
+    background-color: var(--buttonBackgroundColorActive);
 }
 
 p:hover {
@@ -78,7 +78,7 @@ p:hover {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 #outputTextLast {
@@ -87,7 +87,6 @@ p:hover {
 
 #outputTextNew {
     font-size: 35px;
-    overflow: hidden;
 }
 
 #input {
