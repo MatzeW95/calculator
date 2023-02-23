@@ -58,6 +58,7 @@ p:hover {
     padding: 1rem;
     background-color: var(--calculatorBackgroundColor);
     box-shadow: 1px 3px 5px var(--boxShadowColor);
+    margin: 10vh 0;
 }
 
 #output {
