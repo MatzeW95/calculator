@@ -24,12 +24,15 @@ function userInputToCalculation(userInput) {
     if (inputOneNegative == true && userInput == "-") {
         oneNegative = true;
         inputOneNegative = false;
+        updateTextNew("-");
     }
     else if (inputTwoNegative == true && userInput == "-") {
         twoNegative = true;
         inputTwoNegative = false;
+        updateTextNew("-");
     }
     else if (userInput >= 0 && userInput <= 9 || userInput == ".") {
+
         inputOneNegative = false;
         inputTwoNegative = false;
         addToInput(userInput);
@@ -44,12 +47,14 @@ function userInputToCalculation(userInput) {
     }
     else if(userInput == "c" || userInput == "C") {
         resetAll();
+        updateTextNew(input); 
     }
     else if (userInput == "Backspace") {
         removeFromInput();
     }
     else if (userInput == "a" || userInput == "A") {
         inputEqualsAns();
+        updateTextNew(ans);
     }
 }
 
@@ -67,7 +72,7 @@ function addToInput(inputNumber) {
         input += inputNumber;
     }
 
-    console.log("New number: " + Number(input));
+    updateTextNew(Number(input));
 }
 
 /*
@@ -89,6 +94,9 @@ function removeFromInput() {
         inputTwoNegative = true;
         twoNegative = false;
     }
+
+    updateTextNew(Number(input));
+ 
 }
 
 //resets the variables for the addToInput function
@@ -97,6 +105,8 @@ function resetAddToInput() {
     numberOne = input;
     input = 0;
     inputPointSet = false;
+
+    updateTextNew(Number(input));
 }
 
 //sets the arithmetic based on the user input
@@ -163,8 +173,9 @@ function getResult() {
             break;
     }
 
+    updateTextNew(ans);
+
     resetAll();
-    console.log(ans)
 }
 
 //resets all varibales that are needed for a new calculation
@@ -190,5 +201,28 @@ function inputEqualsAns() {
     }
     else if(arithmetic != 0) {
         twoSetAns = true;
+    }
+}
+
+function updateTextLast(output) {
+
+    document.getElementById("outputTextLast").innerHTML = output;
+}
+
+function updateTextNew(output) {
+
+    let lastOutput = document.getElementById("outputTextNew").innerHTML;
+
+    if (arithmetic == 0 && oneNegative == true || arithmetic != 0 && twoNegative == true) {
+
+        if (output == "-" || output < 0) {
+            document.getElementById("outputTextNew").innerHTML = output;
+        }
+        else {
+            document.getElementById("outputTextNew").innerHTML = "-" + output.toString();
+        }
+    }
+    else {
+        document.getElementById("outputTextNew").innerHTML = output;
     }
 }
