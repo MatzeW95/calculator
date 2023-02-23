@@ -8,8 +8,8 @@ var setArithmetic = false;              //if true -> allows the possibility to s
 var ans = 0;                            //saves the last end result
 var numberOne, numberTwo;               //defines the numbers for the calculation
 var arithmetic = 0;                     //sets arithmetic selection on 0 for neutral
-var oneSetAns = false;
-var twoSetAns = false;
+var oneSetAns = false;                  //if true -> number one is the last answer
+var twoSetAns = false;                  //if true -> number two is the last answer
 
 
 //Gets user input based on keyboard input
@@ -96,7 +96,6 @@ function removeFromInput() {
     }
 
     updateTextNew(Number(input));
- 
 }
 
 //resets the variables for the addToInput function
@@ -126,6 +125,7 @@ function selectArithmetic(ari) {
     }
 
     resetAddToInput();
+    updateTextLast(Number(numberOne), arithmetic, null);
 }
 
 /*
@@ -174,6 +174,7 @@ function getResult() {
     }
 
     updateTextNew(ans);
+    updateTextLast(numberOne, arithmetic, numberTwo);
 
     resetAll();
 }
@@ -194,6 +195,7 @@ function resetAll() {
     twoSetAns = false;
 }
 
+//sets the first or the second number as the last answer
 function inputEqualsAns() {
 
     if (arithmetic == 0) {
@@ -204,14 +206,44 @@ function inputEqualsAns() {
     }
 }
 
-function updateTextLast(output) {
+//updates the text output from the "outputTextLast" element
+function updateTextLast(nrOne, ari, nrTwo) {
 
-    document.getElementById("outputTextLast").innerHTML = output;
+    if (nrOne == null && ari == null && nrTwo == null) {
+        
+        document.getElementById("outputTextLast").innerHTML = 0;
+    }
+    else {
+        if(nrOne == null) {
+            nrOne = "";
+        }
+        
+        if (ari == null) {
+            ari = "";
+        }
+        else if (ari == 1) {
+            ari = "+";
+        }
+        else if (ari == 2) {
+            ari = "-"; 
+        }
+        else if (ari == 3) {
+            ari = "*"; 
+        }
+        else if (ari == 4) {
+            ari = "/"; 
+        }
+        
+        if(nrTwo == null) {
+            nrTwo = "";
+        }
+
+        document.getElementById("outputTextLast").innerHTML = nrOne + " " + ari + " " + nrTwo;
+    }
 }
 
+//updates the text output from the "outputTextNew" element 
 function updateTextNew(output) {
-
-    let lastOutput = document.getElementById("outputTextNew").innerHTML;
 
     if (arithmetic == 0 && oneNegative == true || arithmetic != 0 && twoNegative == true) {
 
