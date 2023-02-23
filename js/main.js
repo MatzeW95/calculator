@@ -181,7 +181,7 @@ function getResult() {
     }
 
     if (Number.isInteger(ans) == false) {
-        updateTextNew(ans.toFixed(2));
+        updateTextNew(ans.toFixed(3));
     }
     else {
         updateTextNew(ans);
