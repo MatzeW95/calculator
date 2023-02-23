@@ -12,8 +12,8 @@ var oneSetAns = false;                  //if true -> number one is the last answ
 var twoSetAns = false;                  //if true -> number two is the last answer
 
 //button eventlistener (waiting that the whole document is loaded)
-window.onload=function(){
-    
+window.onload = function(){
+
     document.getElementById("backspace").addEventListener("click", userInputToCalculation("Backspace"));
     document.getElementById("delete").addEventListener("click", userInputToCalculation("c"));
     document.getElementById("division").addEventListener("click", userInputToCalculation("/"));
