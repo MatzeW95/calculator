@@ -13,7 +13,6 @@ body {
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     width: 100vw;
-    height: 100dvh;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -52,13 +51,13 @@ p:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-sizing: content-box;
+    box-sizing: border-box;
     border: 1px solid var(--calculatorBackgroundColor);
     border-radius: 10px;
     padding: 1rem;
     background-color: var(--calculatorBackgroundColor);
     box-shadow: 1px 3px 5px var(--boxShadowColor);
-    margin: 10vh 0;
+    margin: 15vh 0;
 }
 
 #output {
@@ -174,4 +173,22 @@ p:hover {
 
 #ans {
     grid-area: 5 / 3 / 6 / 4; 
+}
+
+@media (max-width: 425px) {
+    
+    body {
+        background-color: var(--calculatorBackgroundColor);
+        justify-content: center;
+        height: 100svh;
+    }
+
+    #calculator {
+        box-shadow: none;
+        width: 100%;
+    }
+
+    #input {
+        height: 350px;
+    }
 }
